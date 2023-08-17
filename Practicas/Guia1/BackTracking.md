@@ -22,3 +22,26 @@ El árbol de desiciones con _backtracking_ quedaría así:
 
 Los nodos verdes serían las soluciones válidas. Los nodos rojos serían los inválidos, de los que no habría que continuar desarrollando las desiciones
 
+### Item G
+
+Árbol de desiciones del algoritmo propuesto en ítem $f)$
+
+![im2](arboles/ej1g.png)
+
+
+### Item H
+
+Árbol de desiciones del algoritmo propuesto con la _regla de factibilidad_
+
+![im2](arboles/ej1h.png)
+
+### Item I
+
+Podemos añadir la condición
+```
+    Si j == 0, retornar True
+```
+
+Cuando $j=0$, entonces en esa ramificación del árbol habrá una solución válida (o el mismo nodo será la solución). El árbol entonces quedaría:
+
+![im3](arboles/ej1i.png)
