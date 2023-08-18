@@ -46,7 +46,7 @@ Cuando $j=0$, entonces en esa ramificación del árbol habrá una solución vál
 
 ![im3](arboles/ej1i.png)
 
-EL algoritmo implementado en `Rust` queda:
+El algoritmo implementado en `Rust` queda:
 
 ```rust
 pub fn subset_sum(nums: Vec<i32>, k: i32) -> i32 {
