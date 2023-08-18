@@ -22,6 +22,8 @@ El árbol de desiciones con _backtracking_ quedaría así:
 
 Los nodos verdes serían las soluciones válidas. Los nodos rojos serían los inválidos, de los que no habría que continuar desarrollando las desiciones
 
+### Item F
+
 ### Item G
 
 Árbol de desiciones del algoritmo propuesto en ítem $f)$
@@ -39,14 +41,14 @@ Los nodos verdes serían las soluciones válidas. Los nodos rojos serían los in
 
 Podemos añadir la condición
 ```
-    Si j == 0, retornar +1
+    Si j == 0, retornar True
 ```
 
-Cuando $j=0$, entonces en esa ramificación del árbol habrá una solución válida (o el mismo nodo será la solución). Esto **sólo es válido porque el multiconjuntos es de Naturales** (me di cuenta testeandolo jeje), ya que, quizá cortamos el algoritmo cuando nuestro $k$ llegó a $0$, por lo que nó habría más naturales para restarle. En cambio si estuviera como elemento el $0$, también formaría parte del subconjunto, y habrían más posibilidades. El árbol entonces quedaría:
+Cuando $j=0$, entonces en esa ramificación del árbol habrá una solución válida (o el mismo nodo será la solución). El árbol entonces quedaría:
 
 ![im3](arboles/ej1i.png)
 
-El algoritmo implementado en `Rust` queda:
+El algoritmo implementado en `Rust` que cuenta la cantidad de soluciones queda:
 
 ```rust
 pub fn subset_sum(nums: Vec<i32>, k: i32) -> i32 {
@@ -66,7 +68,7 @@ pub fn subset_sum(nums: Vec<i32>, k: i32) -> i32 {
     subset_sum_helper(&nums, nums.len()-1, k)
 }
 ```
-
+Esto **sólo es válido porque el multiconjuntos es de Naturales**, ya que, quizá cortamos el algoritmo cuando nuestro $k$ llegó a $0$, por lo que nó habría más naturales para restarle. En cambio si estuviera como elemento el $0$, también formaría parte del subconjunto, y habrían más posibilidades.
 
 ## Ejercicio 2
 
