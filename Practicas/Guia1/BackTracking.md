@@ -76,12 +76,13 @@ Esto **sólo es válido porque el multiconjuntos es de Naturales**, ya que, quiz
 
 Habría que generar $(n^2)!$ cuadrados mágicos si usáramos un algoritmo de _brute force_.
 
-### Item B
 
-Propongo el siguiente pseudo-código como solución:
+## Ejercicio 3
 
+### Item A
+
+
+Pseudocódigo:
 ```
-contarCuadradosMagicos (nat n) -> nat {
-    nat num
-}
+
 ```
