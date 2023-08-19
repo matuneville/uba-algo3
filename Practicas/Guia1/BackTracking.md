@@ -74,6 +74,10 @@ pub fn subset_sum(nums: Vec<i32>, k: i32) -> i32 {
 ```
 Esto **sólo es válido porque el multiconjuntos es de Naturales**, ya que, quizá cortamos el algoritmo cuando nuestro $k$ llegó a $0$, por lo que nó habría más naturales para restarle. En cambio si estuviera como elemento el $0$, también formaría parte del subconjunto, y habrían más posibilidades.
 
+### Item J
+
+Me da fiaca hacer este, pero bastaría con una modificación en el algoritmo previo, teniendo un vector mutable en el argumento al que voy agregando las soluciones.
+
 ## Ejercicio 2
 
 ### Item A
@@ -122,7 +126,7 @@ pub fn magic_squares(n: u8){
             }
             results
         }
-    }
+    }       // lo que sigue es solo para printear en pantalla las soluciones
 
     let initial_square = vec![vec![0; n as usize]; n as usize];
     let initial_nums = (1..=n*n).collect::<Vec<u8>>();
@@ -160,7 +164,7 @@ El árbol recursivo quedaría entonces de la siguiente forma:
 
 ![im2d](arboles/ej2d.png)  
 
-Lo que hará entonces mi nueva solución es, cada vez que haya una línea completa en el cuadrado (sea row, column o diagonal) entonces chequeará que su suma sea igual al númeor mágico.  
+Lo que hará entonces mi nueva solución es, cada vez que haya una línea completa en el cuadrado (sea row, column o diagonal) entonces chequeará que su suma sea igual al número mágico.  
 
 Para le nuevo algoritmo, paso un vector con las soluciones por referencia mutable, para que decida el algoritmo si añadir o no la solución (a diferencia de antes, que al ser fuerza bruta toda rama de desiciones era una solución). En este caso la función no tiene ningun tipo de retorno. El código quedaría:
 
@@ -200,7 +204,7 @@ pub fn magic_squares_bt(n: u8){
                                     magic_num);
             }
         }
-    }
+    }       // lo que sigue es solo para printear en pantalla las soluciones
 
     let mut result: Vec<Vec<Vec<u8>>> = vec![];
     let initial_square = vec![vec![0; n as usize]; n as usize];
