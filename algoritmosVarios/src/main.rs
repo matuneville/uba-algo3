@@ -1,6 +1,5 @@
 mod ejercicios;
 
 fn main() {
-
-    println!("Hello, world!")
+    ejercicios::magic_squares(3);
 }
