@@ -1,3 +1,4 @@
+pub(crate) mod ejercicios_help;
 
 // EJERCICIO 1.1
 
@@ -21,31 +22,6 @@ pub fn subset_sum(nums: Vec<i32>, k: i32) -> i32 {
 
 // EJERCICIO 1.2
 
-fn is_magic(square: &Vec<Vec<u8>>) -> bool {
-    let mut sum: u8 = 0;
-    for i in 0..square.len(){
-        sum += square[0][i];
-    }
-    for row in 0..square.len(){
-        let mut sum_line = 0;
-        let mut sum_vert = 0;
-        for col in 0..square.len(){
-            sum_line += square[row][col];
-            sum_vert += square[col][row];
-        }
-        if sum != sum_line || sum != sum_vert{ return false; }
-    }
-    let mut sum_diag1 = 0;
-    let mut sum_diag2 = 0;
-    for diag in 0..square.len(){
-        sum_diag1 += square[diag][diag];
-        sum_diag2 += square[diag][square.len()-diag-1];
-    }
-    if sum != sum_diag1 || sum != sum_diag2 { return false; }
-
-    return true;
-}
-
 // busco cuadrados magicos con brute force
 pub fn magic_squares(n: u8){
 
@@ -67,12 +43,12 @@ pub fn magic_squares(n: u8){
 
                 let new_pos = // new position to do recursion
                     if pos.1 == square.len() - 1 {
-                    (pos.0 + 1, 0) } else { (pos.0, pos.1 + 1)
-                };
+                        (pos.0 + 1, 0) } else { (pos.0, pos.1 + 1)
+                    };
                 results.extend(find_all_squares( // recursion
-                    new_square,
-                    new_nums,
-                    new_pos,
+                                                 new_square,
+                                                 new_nums,
+                                                 new_pos,
                 ));
             }
             results
@@ -84,7 +60,53 @@ pub fn magic_squares(n: u8){
     let result = find_all_squares(initial_square, initial_nums, (0, 0));
 
     for sq in result{
-        if is_magic(&sq) { println!("{:?}", sq) }
+        if ejercicios_help::is_magic(&sq) { println!("{:?}", sq) }
     }
 }
 
+
+pub fn magic_squares_bt(n: u8){
+
+    let magic_num = (n*n*n + n)/2;
+
+    fn find_magic_squares(result: &mut Vec<Vec<Vec<u8>>>, square: Vec<Vec<u8>>, nums: Vec<u8>, pos: (usize, usize), magic_num: &u8) {
+
+        if ! ejercicios_help::check_full_lines(&square, &magic_num){
+            return;
+        }
+
+        if nums.is_empty() {
+            result.push(square.clone());
+            return;
+
+        } else {
+            for i in 0..nums.len() {
+                let mut new_square = square.clone();
+                new_square[pos.0][pos.1] = nums[i]; // square with new num
+
+                let mut new_nums = nums.clone();
+                new_nums.remove(i); // erase inserted num
+
+                let new_pos = // new position to do recursion
+                    if pos.1 == square.len() - 1 {
+                        (pos.0 + 1, 0) } else { (pos.0, pos.1 + 1)
+                    };
+                find_magic_squares( // recursion
+                                    result,
+                                    new_square,
+                                    new_nums,
+                                    new_pos,
+                                    magic_num);
+            }
+        }
+    }
+
+    let mut result: Vec<Vec<Vec<u8>>> = vec![];
+    let initial_square = vec![vec![0; n as usize]; n as usize];
+    let initial_nums = (1..=n*n).collect::<Vec<u8>>();
+    find_magic_squares(&mut result, initial_square, initial_nums, (0, 0), &magic_num);
+
+    for sq in result {
+        println!("{:?}", sq)
+    }
+}
