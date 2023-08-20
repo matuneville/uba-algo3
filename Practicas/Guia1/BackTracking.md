@@ -217,11 +217,101 @@ pub fn magic_squares_bt(n: u8){
 }
 ```
 
-*Aclaraciones: intenté hacer algo distinto, como un algoritmo que cuando ya se pasara con los primeros numeros (por ejemplo, que la primera linea fuera [9,8,0] y todo el resto tuviera 0s) ya cortara la rama recursiva, pero estuve horas intentando hacer algo que al final estaba mal, así que me terminó dando fiaca e implemente algo más simple.*  
+*Aclaraciones: intenté hacer algo distinto, como un algoritmo que cuando ya se pasara con los primeros numeros (por ejemplo, que la primera linea fuera [9,8,0] y todo el resto tuviera 0s) ya cortara la rama recursiva, pero estuve horas intentando hacer algo que al final estaba mal, así que me terminó dando fiaca e implemente algo más simple. Por último, hay una forma de hacerlo sin utilizar el conjunto de lso números restantes por ubicar, pero no sería con el invariante que propone el ejercicio por lo que fue la solución más factible que se me ocurrió.*  
 
 ## Ejercicio 3
 
-### Item A
 
+Una forma de resolverlo sería buscar todos los subconjuntos de $k$ elementos en el conjunto de naturales $(1...n)$, cuya cantidad coincidirá con el número combinatorio $nCk$. Habría que buscarlos de manera exhaustiva y tener una variable constantemente que nos diga cuál es la máxima suma total posible. El árbol de desiciones de búsqueda de subconjuntos quedaría así: ejemplo con $k=$ y $n=5$  
 
-Pseudocódigo:
+![a3](arboles/ej3.png)
+
+Hice el algoritmo directamente con la mejor poda que se me ocurrió, que es lo que se ve en el árbol. La solución en código es la siguiente:
+
+```rust
+pub fn index_subset_max(matrix: & Vec<Vec<usize>>, k: usize){
+
+    let mut n_set: Vec<usize> = vec![];           
+    for i in 0..matrix.len(){ n_set.push(i); }  // aca inicializo todo lo necesario
+    let indexes: Vec<usize> = vec![];
+    let mut solution: Vec<usize> = vec![];
+    let mut sum: usize = 0;
+
+    fn index_subset_max_helper(matrix: & Vec<Vec<usize>>,
+                               indexes: & Vec<usize>,
+                               current_solution: &mut Vec<usize>,
+                               max_sum: &mut usize,
+                               k: usize,
+                               index: usize,
+                               n_set: &Vec<usize>)
+    {
+        if k == 0 {
+            println!("Un posible subconjunto es {:?}", indexes); // print test subset
+            let new_sum = ejercicios_help::sum_up_all(matrix, indexes);
+            if new_sum > *max_sum {
+                *current_solution = indexes.clone();
+                *max_sum = new_sum;
+            }
+        }
+        else{
+            for i in index..n_set.len(){
+                let mut new_solution = indexes.clone();
+                new_solution.push(i);
+                index_subset_max_helper(& matrix,
+                                        &mut new_solution,
+                                        current_solution,
+                                        max_sum,
+                                        k - 1,
+                                        i+1,
+                                        & n_set);
+            }
+        }
+    }
+
+    index_subset_max_helper(matrix, &indexes, &mut solution, &mut sum, k, 0, & n_set);
+
+    println!("La solución es {:?} que maximiza la suma {}", solution, sum)
+}
+```
+
+Acá el test de la guía:
+
+```rust
+let m: Vec<Vec<usize>> = vec![
+                                vec![0,10,10,1],
+                                vec![0,0,5,2],
+                                vec![0,0,0,1],
+                                vec![0,0,0,0]];
+
+    index_subset_max(&m, 3);
+```
+
+Output:
+```
+Un posible subconjunto es [0, 1, 2]
+Un posible subconjunto es [0, 1, 3]
+Un posible subconjunto es [0, 2, 3]
+Un posible subconjunto es [1, 2, 3]
+La solución es [0, 1, 2] que maximiza la suma 25
+```
+
+La guía indexa a partir de 1 en vez de 0, por eso varían los números, pero es lo mismo.  
+ Ahora otro test:
+
+```rust
+    let n: Vec<Vec<usize>> = vec![
+                                    vec![3,2,2,1,6,23],
+                                    vec![0,14,5,14,0,1],
+                                    vec![29,0,0,0,0,3],
+                                    vec![9,13,10,0,1,5],
+                                    vec![0,3,2,4,1,5],
+                                    vec![2,3,10,5,10,8]];
+
+    index_subset_max(&n, 4);
+```
+
+Output:
+```
+...
+La solución es [0, 2, 3, 5] que maximiza la suma 110
+```

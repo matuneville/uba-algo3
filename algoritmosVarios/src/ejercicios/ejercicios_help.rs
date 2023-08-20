@@ -71,3 +71,13 @@ pub fn check_full_lines(square: &Vec<Vec<u8>>, magic_num: &u8) -> bool{
 
     true
 }
+
+pub fn sum_up_all(matrix: & Vec<Vec<usize>>, indexes: & Vec<usize>,) -> usize {
+    let mut sum = 0;
+    for i in indexes{
+        for j in indexes{
+            sum += matrix[*i][*j];
+        }
+    }
+    return sum;
+}
