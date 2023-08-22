@@ -118,9 +118,7 @@ pub fn magic_squares_bt(n: u8){
 pub fn index_subset_max(matrix: & Vec<Vec<usize>>, k: usize){
 
     let mut n_set: Vec<usize> = vec![];
-    for i in 0..matrix.len(){
-        n_set.push(i);
-    }
+    for i in 0..matrix.len(){ n_set.push(i); }
     let indexes: Vec<usize> = vec![];
     let mut solution: Vec<usize> = vec![];
     let mut sum: usize = 0;
@@ -134,17 +132,19 @@ pub fn index_subset_max(matrix: & Vec<Vec<usize>>, k: usize){
                                n_set: &Vec<usize>)
     {
         if k == 0 {
-            println!("Un posible subconjunto es {:?}", indexes); // print test subset
-            let new_sum = ejercicios_help::sum_up_all(matrix, indexes);
+            println!("Formando subconjunto {:?}", indexes); // print test subset
+            let new_sum = ejercicios_help::sum_up_all(matrix, indexes); 
             if new_sum > *max_sum {
                 *current_solution = indexes.clone();
                 *max_sum = new_sum;
             }
         }
-        else{
-            for i in index..n_set.len(){
+        else {
+            // este ciclo restringe mucho la recursion para evitar conjuntos que no llevan a nada gracias al 1...(n - k)
+            for i in index..=n_set.len() - k  { // si sacamos el -k funcionará igual, pero se harán más operaciones
                 let mut new_solution = indexes.clone();
                 new_solution.push(i);
+                println!("Formando subconjunto {:?}", indexes); // test
                 index_subset_max_helper(& matrix,
                                         &mut new_solution,
                                         current_solution,
