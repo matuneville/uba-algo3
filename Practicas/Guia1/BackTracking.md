@@ -1,20 +1,20 @@
-# Guía práctica 1: BackTracking
+# Guía práctica 1: ejercicios de BackTracking
 
 ## Ejercicio 1
 
-### Item A
+### Ítem A
 
 Las soluciones _candidatas_ son $(0,0,0), (0,0,1), (0,1,0), (0,1,1), (1,0,0), (1,0,1), (1,1,0)$ y $(1,1,1)$
 
-### Item B
+### Ítem B
 
 Las soluciones _válidas_ son $(0,1,0)$ y  $(1,0,1)$
 
-### Item C
+### Ítem C
 
 Las soluciones _parciales_ son los subconjuntos del conjunto de partes de $(6,12,6)$
 
-### Item D
+### Ítem D
 
 El árbol de desiciones con _backtracking_ quedaría así:
 
@@ -22,26 +22,26 @@ El árbol de desiciones con _backtracking_ quedaría así:
 
 Los nodos verdes serían las soluciones válidas. Los nodos rojos serían los inválidos, de los que no habría que continuar desarrollando las desiciones
 
-### Item F
+### Ítem F
 
 La **complejidad temporal** viene dada por: $cantidad\ hojas \times O(c/nodo) \Rightarrow O(2^n)$  
 
 La **complejidad espacial** viene dada por: $O(mantener\ rama\ recursiva) \Rightarrow O(n)$  
 
-### Item G
+### Ítem G
 
 Árbol de desiciones del algoritmo propuesto en ítem $f)$
 
 ![im2](arboles/ej1g.png)
 
 
-### Item H
+### Ítem H
 
 Árbol de desiciones del algoritmo propuesto con la _regla de factibilidad_
 
 ![im2](arboles/ej1h.png)
 
-### Item I
+### Ítem I
 
 Podemos añadir la condición
 ```
@@ -74,17 +74,17 @@ pub fn subset_sum(nums: Vec<i32>, k: i32) -> i32 {
 ```
 Esto **sólo es válido porque el multiconjuntos es de Naturales**, ya que, quizá cortamos el algoritmo cuando nuestro $k$ llegó a $0$, por lo que nó habría más naturales para restarle. En cambio si estuviera como elemento el $0$, también formaría parte del subconjunto, y habrían más posibilidades.
 
-### Item J
+### Ítem J
 
 Me da fiaca hacer este, pero bastaría con una modificación en el algoritmo previo, teniendo un vector mutable en el argumento al que voy agregando las soluciones.
 
 ## Ejercicio 2
 
-### Item A
+### Ítem A
 
 Habría que generar $(n^2)!$ cuadrados mágicos si usáramos un algoritmo de _brute force_.
 
-### Item B
+### Ítem B
 
 El árbol recursivo quedaría de la forma:
 
@@ -158,7 +158,7 @@ Output:
 [[8, 3, 4], [1, 5, 9], [6, 7, 2]]
 ```
 
-## Item E
+## Ítem E
 
 El árbol recursivo quedaría entonces de la siguiente forma:  
 
@@ -308,3 +308,6 @@ La solución es [0, 1, 2] que maximiza la suma 25
 
 La guía indexa a partir de 1 en vez de 0, por eso varían los números, pero es lo mismo. Le agregué un print para ver cómo se va formando el subconjunto y apreciar cómo el algoritmo no crea subconjuntos que no terminan en ninguna solución, como $[2,3]$, al que no se le podría agregar ningun otro elemento.  
 
+## Ejercicio 4
+
+Me dio fiaca pero creo que hay que usar un algoritmo muy similar al anterior, solo que en vez de calcular la suma, hay que calcular la función esa rara que pide la consigna.

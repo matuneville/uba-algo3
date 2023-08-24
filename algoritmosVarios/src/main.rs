@@ -1,13 +1,8 @@
-mod ejercicios;
-use ejercicios::*;
+mod ejercicios_dp;
+use crate::ejercicios_dp::tragabilletes;
 
 fn main() {
-
-    let m: Vec<Vec<usize>> = vec![
-                                    vec![0,10,10,1],
-                                    vec![0,0,5,2],
-                                    vec![0,0,0,1],
-                                    vec![0,0,0,0]];
-
-    index_subset_max(&m, 3);
+    let billetes = vec![20, 10, 5, 3, 2,20];
+    let res = tragabilletes(& billetes, 0, 14);
+    println!("{:?}", res);
 }
