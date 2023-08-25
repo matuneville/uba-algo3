@@ -8,18 +8,14 @@
 
 ### Ítem A 
 
-$$
-\begin{equation}
-    cc(B, c) = 
-    \begin{cases}
-        ni\ idea, & \text{si } , \\
-       despues\ lo\ hago,  & \text{si } , \\
-    
-    \end{cases}
-\end{equation}
-$$
+- (inf, inf) si i = |B| y j > 0  
 
-### Ítem B
+- (0, 0) si j <= 0  
+
+- min( (cc({b2,...,bn}, c-b1).first + b1, 1 + cc({b2,...,bn}, c-b1).second),
+     (cc({b2,...,bn}, c).first, cc({b2,...bn}, c).second)) caso contrario
+
+### Ítem C
 
 ```rust
 pub fn tragabilletes(billetes: & Vec<i8>, i: usize, j: i8) -> (i8, i8){
@@ -50,4 +46,23 @@ pub fn tragabilletes(billetes: & Vec<i8>, i: usize, j: i8) -> (i8, i8){
 }
 ```
 
-La complejidad es $O(2^n)$ porque es el producto de la cantidad total de nodos ($O(2^{n+1}-1)$) y la complejidad de calcular cada uno (constante).
+La complejidad es $O(2^n)$ porque es el producto de la cantidad total de nodos ($O(2^{n+1}-1)$) y la complejidad de calcular cada uno (constante).  
+
+- La cantidad de *estados posibles* es $n \times 2^n$ (porque $i$ puede tomar $n$ valores posibles, siendo $n$ la cantidad de billetes, mientras que $j$ puede tomar $2^n$ valores posibles)
+- La cantidad total de *llamados recursivos* es $O(2^n)$
+
+No hay superposición de estados ¿?¿?
+
+## Ejercicio 7
+
+### Ítem B
+
+av(P, c, j) es  
+
+- indefinido si c < 0 o c > j >= |P|
+
+- 0 si j < 0 (indexo desde 0)
+
+- max( av(P, j-1, c+1) + P[j], av(P, j-1, c-1) - P[j], av(P, j-1, c) )
+
+
