@@ -12,8 +12,8 @@ $$
 \begin{equation}
     cc(B, c) = 
     \begin{cases}
-        (), & \text{si } , \\
-       no se,  & \text{si } , \\
+        ni\ idea, & \text{si } , \\
+       despues\ lo\ hago,  & \text{si } , \\
     
     \end{cases}
 \end{equation}
@@ -29,7 +29,7 @@ pub fn tragabilletes(billetes: & Vec<i8>, i: usize, j: i8) -> (i8, i8){
         return (0, 0);
     }
     if i == billetes.len(){ // solo llega aca si no llego al precio requerido
-        return (127, 127);
+        return (127, 127); // (infinito - infinito)
     }
 
     let bt_con_billete = tragabilletes(billetes, i+1, j-billetes[i]); // ($5, 1)
@@ -50,4 +50,4 @@ pub fn tragabilletes(billetes: & Vec<i8>, i: usize, j: i8) -> (i8, i8){
 }
 ```
 
-La complejidad es $O(2^n)$ porque es la cantidad total de nodos ($O(2^{n+1}-1)$) por calcular cada uno (constante).
+La complejidad es $O(2^n)$ porque es el producto de la cantidad total de nodos ($O(2^{n+1}-1)$) y la complejidad de calcular cada uno (constante).
