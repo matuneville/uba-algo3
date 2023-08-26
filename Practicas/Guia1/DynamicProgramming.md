@@ -11,11 +11,9 @@
 $$
 cc(B, c) =
 \begin{cases}
-     <\infty, \infty> \ \ \ \ \  \ \ \ \ \ \ \ \ \ \   \text{si } i=|B| \land j > 0\\
-     <0, 0>     \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \text{si } j \leq 0\\
-     min( <cc([b_2,...,b_n], c-b_1).first + b_1, 1 + cc([b_2,...,b_n], c-b_1).second>,
-     <cc([b_2,...,b_n], c).first, cc([b_2,...,b_n], c).second>)\ \text{caso contrario}
-     
+     (\infty, \infty) \ \ \ \ \  \ \ \ \ \ \ \ \ \ \   \text{si } i=|B| \land j > 0\\
+     (0, 0)     \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \text{si } j \leq 0\\
+     min( (cc([b_2,...,b_n], c-b_1).first + b_1, 1 + cc([b_2,...,b_n], c-b_1).second), (cc([b_2,...,b_n], c).first, cc([b_2,...,b_n], c).second))\ \text{caso contrario}
 \end{cases}
 $$
 
