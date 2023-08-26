@@ -61,16 +61,8 @@ No hay superposición de estados ¿?¿?
 
 ### Ítem B
 
-av(P, c, j) es  
-
-- indefinido si c < 0 o c > j >= |P|
-
-- 0 si j < 0 (indexo desde 0)
-
-- max( av(P, j-1, c+1) + P[j], av(P, j-1, c-1) - P[j], av(P, j-1, c) )
-
 $$
-cc(B, c) =
+av(P, c, j) =
 \begin{cases}
      indefinido & \text{si } c < 0 \lor |P| \leq j < c \\
      0 & \text{si } j < 0 \\
