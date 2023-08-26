@@ -8,14 +8,18 @@
 
 ### Ítem A 
 
-$$cc(B, c) =$$
+$$
+cc(B, c) =
+\begin{cases}
+     <\infty, \infty> \ \ \ \ \  \ \ \ \ \ \ \ \ \ \   \text{si } i=|B| \land j > 0\\
+     <0, 0>     \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \text{si } j \leq 0\\
+     min( <cc([b_2,...,b_n], c-b_1).first + b_1, 1 + cc([b_2,...,b_n], c-b_1).second>,
+     <cc([b_2,...,b_n], c).first, cc([b_2,...,b_n], c).second>)\ \text{caso contrario}
+     
+\end{cases}
+$$
 
-- (inf, inf) si i = |B| y j > 0  
-
-- (0, 0) si j <= 0  
-
-- min( (cc({b2,...,bn}, c-b1).first + b1, 1 + cc({b2,...,bn}, c-b1).second),
-     (cc({b2,...,bn}, c).first, cc({b2,...bn}, c).second)) caso contrario
+El $min(tupla1, tupla2)$ lo que hace es tomar la tupla con el menor primer elemento. Si coinciden, se fija en el segundo.
 
 ### Ítem C
 
