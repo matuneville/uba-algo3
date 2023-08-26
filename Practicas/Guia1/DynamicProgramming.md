@@ -8,6 +8,8 @@
 
 ### Ítem A 
 
+$$cc(B, c) =$$
+
 - (inf, inf) si i = |B| y j > 0  
 
 - (0, 0) si j <= 0  
@@ -48,7 +50,7 @@ pub fn tragabilletes(billetes: & Vec<i8>, i: usize, j: i8) -> (i8, i8){
 
 La complejidad es $O(2^n)$ porque es el producto de la cantidad total de nodos ($O(2^{n+1}-1)$) y la complejidad de calcular cada uno (constante).  
 
-- La cantidad de *estados posibles* es $n \times 2^n$ (porque $i$ puede tomar $n$ valores posibles, siendo $n$ la cantidad de billetes, mientras que $j$ puede tomar $2^n$ valores posibles)
+- La cantidad de *estados posibles* es $n \times P$ (porque $i$ puede tomar $n$ valores posibles, siendo $n$ la cantidad de billetes, mientras que $j$ puede tomar $2^n$ valores posibles)
 - La cantidad total de *llamados recursivos* es $O(2^n)$
 
 No hay superposición de estados ¿?¿?
