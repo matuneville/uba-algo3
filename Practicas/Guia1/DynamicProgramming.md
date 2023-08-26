@@ -69,4 +69,12 @@ av(P, c, j) es
 
 - max( av(P, j-1, c+1) + P[j], av(P, j-1, c-1) - P[j], av(P, j-1, c) )
 
+$$
+cc(B, c) =
+\begin{cases}
+     indefinido & \text{si } c < 0 \lor |P| \leq j < c \\
+     0 & \text{si } j < 0 \\
+     max(av(P, j-1, c+1) + P[j], av(P, j-1, c-1) - P[j], av(P, j-1, c)) & \text{caso contrario}
+\end{cases}
+$$
 
