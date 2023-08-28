@@ -1,5 +1,6 @@
 // #########################  EJERCICIO 6 ######################### ######################### #########################
 
+use std::arch::x86_64::_bittest;
 use std::cmp::max;
 
 pub fn tragabilletes_bt(billetes: & Vec<i32>, i: usize, j: i32) -> (i32, i32){
@@ -34,7 +35,9 @@ pub fn tragabilletes_topdown(billetes: & Vec<i32>, i: usize, j: i32) -> (i32, i3
     let mut matriz_dp = crear_matriz_memo(billetes.len(), j); // armo el cuadrado para memorizar
 
     fn billetes_topdown_recursivo(billetes: &Vec<i32>, memo_bottom_up: &mut Vec<Vec<(i32, i32)>>, i: usize, j: i32) -> (i32, i32) {
+
         if j <= 0 { return (0, 0); }
+
         if i == billetes.len() { return (999, 999); }
 
         if memo_bottom_up[i][j as usize] != (-1, -1) { // si ya esta resuelto
@@ -112,11 +115,11 @@ pub fn astro_void(asteroides: & Vec<i32>) -> i32 {
     return astro_recursivo(&asteroides, 0, (asteroides.len() - 1) as i32);
 }
 
-pub fn astro_void_dp(asteroides: & Vec<i32>) -> i32 {
+pub fn astro_dp_topdown(asteroides: & Vec<i32>) -> i32 {
 
     let mut dp = crear_matriz_astro(asteroides.len(), asteroides.len()); // creo matriz para dp
 
-    fn astro_recursivo_dp(asteroides: &Vec<i32>, dp: &mut Vec<Vec<i32>>, cant: i32, dia: i32) -> i32 {
+    fn astro_recursivo(asteroides: &Vec<i32>, dp: &mut Vec<Vec<i32>>, cant: i32, dia: i32) -> i32 {
 
         let cant_i: usize = cant as usize; // uso otro type para indexar
         let dia_i: usize = dia as usize;
@@ -127,13 +130,13 @@ pub fn astro_void_dp(asteroides: & Vec<i32>) -> i32 {
 
         if dp[dia_i][cant_i] != -1 { return dp[dia_i][cant_i]; }
 
-        dp[dia_i][cant_i] = max(astro_recursivo_dp(asteroides, dp, cant - 1, dia - 1) - asteroides[dia_i], // caso vendo
-                      max(astro_recursivo_dp(asteroides, dp, cant + 1, dia - 1) + asteroides[dia_i], // caso compro
-                          astro_recursivo_dp(asteroides, dp, cant, dia - 1))); // caso vendo y compro, o no hago nada
+        dp[dia_i][cant_i] = max(astro_recursivo(asteroides, dp, cant - 1, dia - 1) - asteroides[dia_i], // caso vendo
+                      max(astro_recursivo(asteroides, dp, cant + 1, dia - 1) + asteroides[dia_i], // caso compro
+                          astro_recursivo(asteroides, dp, cant, dia - 1))); // caso vendo y compro, o no hago nada
 
         return dp[dia_i][cant_i];
     }
-    return astro_recursivo_dp(&asteroides, &mut dp,0, (asteroides.len() - 1) as i32);
+    return astro_recursivo(&asteroides, &mut dp, 0, (asteroides.len() - 1) as i32);
 }
 
 pub fn crear_matriz_astro(n: usize, p: usize) -> Vec<Vec<i32>>{
@@ -146,6 +149,33 @@ pub fn crear_matriz_astro(n: usize, p: usize) -> Vec<Vec<i32>>{
         memo_topdown.push(linea);
     }
     return memo_topdown;
+}
+
+pub fn astro_dp_bottomup(asteroides: & Vec<i32>) -> i32 {
+    let mut dp = crear_matriz_astro(asteroides.len()+1, asteroides.len()); // creo matriz para dp
+    let n = asteroides.len();
+
+    for i in 0..=n{
+        dp[0][i] = 0; // el dia base con 0 ganancia, seria como el dia -1
+    }
+
+    for dia in 1..n{
+        for cant in 0..dia+1{
+            let r1 = dp[dia - 1][cant - 1] + asteroides[dia - 1];
+            let r2 = dp[dia - 1][cant + 1] - asteroides[dia - 1];
+            let r3 = dp[dia - 1][cant];
+            dp[dia][cant] = max(r1, // caso vendo
+                                max(r2, // caso compro
+                                    r3)) // caso vendo y compro, o no hago nada
+        }
+    }
+
+    let mut max_ganancia = 0;
+    for cant in 0..n {
+        max_ganancia = max(max_ganancia, dp[n - 1][cant]);
+    }
+
+    max_ganancia
 }
 
 // #########################  EJERCICIO 8 ######################### ######################### #########################
