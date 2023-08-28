@@ -33,7 +33,7 @@ pub fn tragabilletes_bt(billetes: & Vec<i32>, i: usize, j: i32) -> (i32, i32){
         return (0, 0);
     }
     if i == billetes.len(){ // solo llega aca si no llego al precio requerido
-        return (999, 999); // representa infinito infinito, no deberia usar numeros tan grandes
+        return (99999, 99999); // representa infinito infinito, no deberia usar numeros tan grandes
     }
 
     let bt_con_billete = tragabilletes_bt(billetes, i+1, j-billetes[i]);
@@ -73,18 +73,18 @@ Hay que usar una matriz de tamaño $n \times P$ para memoizar el algoritmo de ba
 ```rust
 pub fn tragabilletes_topdown(billetes: & Vec<i32>, i: usize, j: i32) -> (i32, i32) {
 
-    let mut matriz_memo = crear_matriz_memo(billetes.len(), j); // armo el cuadrado para memorizar con (-1,-1)
+    let mut matriz_dp = crear_matriz_memo(billetes.len(), j); // armo el cuadrado para memorizar
 
-    fn bottomup_recursivo(billetes: &Vec<i32>, memo_bottom_up: &mut Vec<Vec<(i32, i32)>>, i: usize, j: i32) -> (i32, i32) {
+    fn billetes_topdown_recursivo(billetes: &Vec<i32>, memo_bottom_up: &mut Vec<Vec<(i32, i32)>>, i: usize, j: i32) -> (i32, i32) {
         if j <= 0 { return (0, 0); }
-        if i == billetes.len() { return (127, 127); }
+        if i == billetes.len() { return (999, 999); }
 
         if memo_bottom_up[i][j as usize] != (-1, -1) { // si ya esta resuelto
             return memo_bottom_up[i][j as usize];
         }
 
-        let bt_con_billete = bottomup_recursivo(billetes, memo_bottom_up, i + 1, j - billetes[i]);
-        let bt_sin_billete = bottomup_recursivo(billetes, memo_bottom_up, i + 1, j);
+        let bt_con_billete = billetes_topdown_recursivo(billetes, memo_bottom_up, i + 1, j - billetes[i]);
+        let bt_sin_billete = billetes_topdown_recursivo(billetes, memo_bottom_up, i + 1, j);
 
         memo_bottom_up[i][j as usize] = if bt_sin_billete.0 == bt_con_billete.0 + billetes[i] { // modifico matriz memo
             if bt_con_billete.1 < bt_sin_billete.1 { (bt_con_billete.0 + billetes[i], bt_con_billete.1 + 1) } else { bt_sin_billete }
@@ -97,11 +97,20 @@ pub fn tragabilletes_topdown(billetes: & Vec<i32>, i: usize, j: i32) -> (i32, i3
         return memo_bottom_up[i][j as usize];
     }
 
-    return bottomup_recursivo(& billetes, &mut matriz_memo, i, j);
+    return billetes_topdown_recursivo(& billetes, &mut matriz_dp, i, j);
 }
 ```
 
-La complejidad temporal se define como $\text{cantidad de estados posibles} \times \text{calcular cada nodo}$. Por lo tanto, la complejidad temporal es de $O(n\times P \times 1) = O(nP)$
+### Ítem F
+
+La **complejidad temporal** se define como $\text{cantidad de estados posibles} \times \text{calcular cada nodo}$. Por lo tanto, la complejidad temporal es de $O(n\times P \times 1) = O(nP)$
+
+### Ítem G
+
+```
+ni idea despues lo hago
+```
+
 
 ## Ejercicio 7
 
@@ -110,9 +119,39 @@ La complejidad temporal se define como $\text{cantidad de estados posibles} \tim
 $$
 av(P, c, j) =
 \begin{cases}
-     indefinido & \text{si } c < 0 \lor |P| \leq j < c \\
+     -\infty & \text{si } c < 0 \lor |P| \leq j < c \\
      0 & \text{si } j < 0 \\
      max(av(P, j-1, c+1) + P[j], av(P, j-1, c-1) - P[j], av(P, j-1, c)) & \text{caso contrario}
 \end{cases}
 $$
+
+### Ítem D
+
+```rust
+pub fn astro_void_dp(asteroides: & Vec<i32>) -> i32 {
+
+    let mut dp = crear_matriz_astro(asteroides.len(), asteroides.len()); // creo matriz para dp
+
+    fn astro_recursivo_dp(asteroides: &Vec<i32>, dp: &mut Vec<Vec<i32>>, cant: i32, dia: i32) -> i32 {
+
+        let cant_i: usize = cant as usize; // uso otro type para indexar
+        let dia_i: usize = dia as usize;
+
+        if cant-1 > dia || cant < 0 { return -99999; } // caso base -infinito
+
+        if dia < 0 { return 0; } // caso base 0
+
+        if dp[dia_i][cant_i] != -1 { return dp[dia_i][cant_i]; }
+
+        dp[dia_i][cant_i] = max(astro_recursivo_dp(asteroides, dp, cant - 1, dia - 1) - asteroides[dia_i], // caso vendo
+                      max(astro_recursivo_dp(asteroides, dp, cant + 1, dia - 1) + asteroides[dia_i], // caso compro
+                          astro_recursivo_dp(asteroides, dp, cant, dia - 1))); // caso vendo y compro, o no hago nada
+
+        return dp[dia_i][cant_i];
+    }
+    return astro_recursivo_dp(&asteroides, &mut dp,0, (asteroides.len() - 1) as i32);
+}
+```
+
+Su **complejidad temporal** está dada por $\text{cantidad de estados posibles} \times \text{calcular cada nodo}$, que da como resultado $O(dias \times asteroides)$, que con las variables dadas por la consigna quedaría en $O(j\times c)$.  
 

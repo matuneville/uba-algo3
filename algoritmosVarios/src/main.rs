@@ -1,14 +1,10 @@
 mod ejercicios_dp;
-use crate::ejercicios_dp::{tragabilletes_topdown, tragabilletes_bt};
+use crate::ejercicios_dp::{tragabilletes_topdown, tragabilletes_bt, astro_void, astro_void_dp};
 
 fn main() {
-    let billetes = vec![4,3,2,9,6,7,8,2,3];
+    let asteroides = vec![3, 2, 5, 6];
 
-    let precio = 17;
-
-    let res = tragabilletes_bt(& billetes, 0, precio);
-    let res2 = tragabilletes_topdown(&billetes, 0, precio);
+    let res = astro_void_dp(& asteroides);
 
     println!("{:?}", res);
-    println!("{:?}", res2);
 }
