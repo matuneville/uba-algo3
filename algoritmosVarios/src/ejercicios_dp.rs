@@ -152,7 +152,7 @@ pub fn crear_matriz_astro(n: usize, p: usize) -> Vec<Vec<i32>>{
 }
 
 pub fn astro_dp_bottomup(asteroides: & Vec<i32>) -> i32 {
-    let mut dp = crear_matriz_astro(asteroides.len()+1, asteroides.len()); // creo matriz para dp
+    let mut dp = crear_matriz_astro(asteroides.len()+1, asteroides.len()+1); // creo matriz para dp
     let n = asteroides.len();
 
     for i in 0..=n{
@@ -178,9 +178,17 @@ pub fn astro_dp_bottomup(asteroides: & Vec<i32>) -> i32 {
     max_ganancia
 }
 
-// #########################  EJERCICIO 8 ######################### ######################### #########################
+// #########################  EJERCICIO 10 ######################### ######################### #########################
 
+pub fn apilar_cajas(w: & Vec<i32>, s: & Vec<i32>) -> i32 {
 
+    fn apilar_recursivo(w: & Vec<i32>, s: & Vec<i32>, soporte: i32, i: usize, sol_actual: i32, sol_max: i32){
+        if soporte < 0{
+            
+        }
+
+    }
+}
 
 
 
