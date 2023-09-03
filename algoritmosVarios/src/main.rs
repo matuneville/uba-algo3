@@ -1,8 +1,8 @@
 mod ejercicios_greedy;
-use crate::ejercicios_greedy::{max_k_sum, parejas};
+use crate::ejercicios_greedy::{gasolineras, max_k_sum, parejas};
 
 fn main() {
-    let s = vec![19, 7, 5, 6, 1];
+    let s = vec![0,3,4,7,10,11,16,21,25,26,27,30];
 
-    println!("{:?}", max_k_sum(s.clone(), 2));
+    println!("{:?}", gasolineras(& s, 5));
 }

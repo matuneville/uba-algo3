@@ -33,3 +33,20 @@ pub fn max_k_sum(mut s: Vec<i32>, k: usize) -> i32{
     }
     return res;
 }
+
+// ############################## ejercicio 16 ############################## ##############################
+
+pub fn gasolineras(p: & Vec<i32>, mut c: i32) -> Vec<i32>{
+    let mut sol: Vec<i32> = vec![];
+    let c_og = c;
+    for i in 0..p.len()-1{
+        if p[i+1]-p[i] <= c {
+            c = c - (p[i+1]-p[i]); // todavia alcanza asi que gasto nafta hasta sgte parada
+        }
+        else{
+            sol.push(p[i]);
+            c = c_og - (p[i+1]-p[i]); // cargo nafta y gasto hasta la sgte parada
+        }
+    }
+    return sol;
+}
