@@ -1,7 +1,7 @@
 // #########################  EJERCICIO 6 ######################### ######################### #########################
 
 use std::arch::x86_64::_bittest;
-use std::cmp::max;
+use std::cmp::{max, min};
 
 pub fn tragabilletes_bt(billetes: & Vec<i32>, i: usize, j: i32) -> (i32, i32){
     // i = indice que veo de billetes, j = precio restante
@@ -180,19 +180,62 @@ pub fn astro_dp_bottomup(asteroides: & Vec<i32>) -> i32 {
 
 // #########################  EJERCICIO 10 ######################### ######################### #########################
 
-pub fn apilar_cajas(w: & Vec<i32>, s: & Vec<i32>) -> i32 {
+pub fn apilar_bt(w: & Vec<i32>, s: & Vec<i32>, soporte: i32, i: usize) -> i32{
+    if i == w.len(){ return 0; } // caso base: considere todas las cajas
+    else if soporte < 0{ return -9999; } // termine de poner cajas
 
-    fn apilar_recursivo(w: & Vec<i32>, s: & Vec<i32>, soporte: i32, i: usize, sol_actual: i32, sol_max: i32){
-        if soporte < 0{
-            
-        }
+    let soporte_con = if soporte == 9999 { s[i] } else { min(soporte - w[i], s[i]) };
+    let soporte_sin = if soporte == 9999 { 9999 }   else { soporte };
 
-    }
+    let pongo_caja    = apilar_bt(& w, & s, soporte_con, i+1) + 1;
+    let no_pongo_caja = apilar_bt(& w, & s, soporte_sin, i+1);
+
+    return max(pongo_caja, no_pongo_caja);
 }
 
 
 
+fn crear_matriz_cajas(n: usize, m: i32) -> Vec<Vec<i32>>{
+    let mut memo_topdown: Vec<Vec<i32>> = vec![];
+    for _ in 0..n {
+        let mut linea: Vec<i32> = vec![];
+        for _ in 0..=m{
+            linea.push(-1);
+        }
+        memo_topdown.push(linea);
+    }
+    return memo_topdown;
+}
 
+pub fn apilar_topdown(w: & Vec<i32>, s: & Vec<i32>) -> i32{
+    let mut suma_soportes = 0;
+    for sop in s{
+        suma_soportes += *sop;
+    }
+    let mut dp = crear_matriz_cajas(w.len()+1, suma_soportes+1);
+
+    fn apilar_r(w: & Vec<i32>, s: & Vec<i32>, dp: &mut Vec<Vec<i32>>, soporte: i32, i: usize, suma_soportes: i32) -> i32 {
+        if i == w.len(){ return 0; } // caso base: considere todas las cajas
+        else if soporte < 0 { return -99999; } // termine de poner cajas
+
+        let soporte_con = if soporte == suma_soportes { s[i] } else { min(soporte - w[i], s[i]) };
+        let soporte_sin = if soporte == suma_soportes { suma_soportes }   else { soporte };
+
+        let sop_i = soporte as usize; // cambio tipo para indexar
+
+        if dp[i][sop_i] == -1 {
+
+            let res = max(
+                            apilar_r(&w, &s, dp, soporte_con, i + 1, suma_soportes) + 1,
+                            apilar_r(&w, &s, dp, soporte_sin, i + 1, suma_soportes));
+            dp[i][sop_i] = res;
+        }
+
+        return dp[i][sop_i];
+    }
+
+    return apilar_r(& w, & s, &mut dp, suma_soportes, 0, suma_soportes);
+}
 
 
 

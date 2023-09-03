@@ -1,10 +1,8 @@
-mod ejercicios_dp;
-use crate::ejercicios_dp::{astro_dp_bottomup};
+mod ejercicios_greedy;
+use crate::ejercicios_greedy::{max_k_sum, parejas};
 
 fn main() {
-    let asteroides = vec![3, 2, 5, 6];
+    let s = vec![19, 7, 5, 6, 1];
 
-    let res = astro_dp_bottomup(& asteroides);
-
-    println!("{:?}", res);
+    println!("{:?}", max_k_sum(s.clone(), 2));
 }
