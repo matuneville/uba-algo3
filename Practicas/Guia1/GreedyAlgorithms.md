@@ -44,7 +44,7 @@ $$
 
 Es decir, los $k$ primer elementos del arreglo serán los mayores, que maximizarán la suma posible tomando subconjuntos de cardinal $k$.  
 
-Supongamos entonces que existe una posible mayor suma que la que obtuvimos con dicho algoritmo. Esto significaría que existe un elemento que se encuentra entre los últimos $n-k$ elementos del arreglo, que, si lo reemplazaramos por uno de los $k$ primeros, nos daría una mayor suma. Esto solo sería posible si este elemento fuera mayor que el que fue reemplazado, pero esto es imposible pues incluso el último elemento de los $k$ mayores es mayor que todo el resto. Es decir, $\forall i\in \N,\ k \leq i < n \Rightarrow S[k-1] > S[i]$.
+Supongamos entonces que existe una posible mayor suma que la que obtuvimos con dicho algoritmo. Esto significaría que existe un elemento que se encuentra entre los últimos $n-k$ elementos del arreglo, que, si lo reemplazaramos por uno de los $k$ primeros, nos daría una mayor suma. Esto solo sería posible si este elemento fuera mayor que el que fue reemplazado, pero esto es imposible pues incluso el último elemento de los $k$ mayores es mayor que todo el resto. Es decir, $\forall i\in \mathbb{N},\ k \leq i < n \Rightarrow S[k-1] > S[i]$.
 
 ### Ítem B
 
