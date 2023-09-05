@@ -154,12 +154,6 @@ Su **complejidad temporal** está dada por $\text{cantidad de estados posibles} 
 La **complejidad espacial** está dada por la matriz de memoización de tamaño $j^2$, y las $k$ veces en las que se guardan copias de $j$ y $c$, por lo que la complejidad queda $O(j^2 + k)$
 
 
-### Ítem E
-
-```
-```
-
-
 ## Ejercicio 10
 
 ### Ítem B
