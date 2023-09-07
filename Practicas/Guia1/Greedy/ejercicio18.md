@@ -30,10 +30,10 @@ Hay dos posibilidades acerca de nuestro $X$:
 
 - si le agrego un número $x$ tal que $x = Min(X)$, entonces $mex(Y_{i+1}) = Max(Y_i) + 1 = x$
 
-**Caso 2**: Que no contenga un número de $0...n$. Entonces, si el número no contenido es $x$, podremos realizar el caso 1 para los números del $0...x$. Luego, no importará el orden en que sigamos tomando números restantes, pues nunca obtendremos un resultado mayor al aplicar nuestra función $mex$ a la solución actual. En este caso, el resultado será
+**Caso 2**: Que no contenga un número de $0...n$. Entonces, si el mínimo número no contenido es $x$, podremos realizar el caso 1 para los números del $0...x$. Luego, no importará el orden en que sigamos tomando números restantes, pues nunca obtendremos un resultado mayor al aplicar nuestra función $mex$ a la solución actual. En este caso, el resultado será
 
 $$
-f_{mex}(X)= caso1 (\lbrace 0,...,x \rbrace) + m(x+1)
+f_{mex}(X)= caso1 (\lbrace 0,...,x \rbrace) + m \times x
 $$
 
 siendo $m$ la cantidad de números que hay mayores que $x$ en $X$
