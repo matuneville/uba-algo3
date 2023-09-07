@@ -5,7 +5,8 @@ A ojo se ve fácilmente que una solución es ir tomando los distintos subconjunt
 $$
 f_{mex}(\lbrace 1, 0, 3\rbrace) =
 $$
-$$ 
+ 
+$$
 mex(\lbrace 1 \rbrace) + mex(\lbrace 1, 0\rbrace) + mex(\lbrace 1, 0, 3\rbrace) = 0 + 2+ 2 = 4
 $$
 
@@ -14,6 +15,7 @@ Mientras que si lo ordenamos crecientemente:
 $$
 f_{mex}(\lbrace 0, 1, 3\rbrace) =
 $$
+ 
 $$
 mex(\lbrace 0 \rbrace) + mex(\lbrace 0, 1\rbrace) + mex(\lbrace 0, 1, 3\rbrace) = 1 + 2+ 2 = 5
 $$
