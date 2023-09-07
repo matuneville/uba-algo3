@@ -26,8 +26,6 @@ La complejidad es de $O(n\ log\ n)$ ya que se realiza un sorting y luego se reco
 
 Acá no puedo usar un algoritmo greedy como el del problema del _coin change_ (en el que los valores de las monedas son múltiplos de la más chica de ellas) ya que no siempre tomar el de mayor valor será una solución eficiente. Supongamos que tenemos los objetos $[(100, 70), (50, 35), (55, 35)]$, siendo cada objeto $(Precio, Peso)$, y un único peso disponible de $70$. Entonces agarrar los dos últimos elementos será la solución, en vez de agarrar el primero que es el de mayor precio.  
 
-Tampoco serviría tomar el de mayor coeficiente $Precio / Peso$ porque  
-
 Empiezo con una solución por backtracking de la forma:  
 
 $$

@@ -1,40 +1,10 @@
-# Guía 1: Ejercicios de algoritmos greedy
-
-## Ejercicio 13
-
-### Ítem B
-
-```rust
-pub fn parejas(grupo_a: Vec<i32>, grupo_b: Vec<i32>) -> i32 {
-    let mut result: i32 = 0;
-
-    let mut i_a: usize = 0;
-    let mut i_b: usize = 0;
-
-    while i_a < grupo_a.len() && i_b < grupo_b.len(){
-        if grupo_a[i_a] - grupo_b[i_b] <= 1 && grupo_a[i_a] - grupo_b[i_b] >= - 1{
-            result += 1;
-            i_a += 1;
-            i_b += 1;
-        }
-        else if grupo_a[i_a] < grupo_b[i_b]{
-            i_a += 1;
-        }
-        else{
-            i_b += 1;
-        }
-    }
-    return result;
-}
-```
-
 ## Ejercicio 14
 
 ### Ítem A
 
 Un algoritmo sencillo podría ordenar el conjunto (representado mediante un arreglo arreglo) de forma decreciente, y luego tomar los $k$ primer elementos de este, que serán los más grandes del arreglo.  
 
-#### Demostración
+#### Demostración (media informal je)
 
 Con el algoritmo propuesto, podemos decir que:
 
@@ -73,27 +43,3 @@ Hay una forma más eficiente con la que no necesitaremos ordenar todo el arreglo
 - Si es mayor que el elemento minimo, entonces lo quito y lo agrego, que cuesta $O(log\ k)$
 - En el peor caso lo haré con los $n-k$ elementos
 - La complejidad queda entonces $O(k + (n-k)\ log\ k) = O((n-k)\ log\ k) \in O(n\ log\ k)$ y listo (_ejercicio muy algo2 jeje_)
-
-
-## Ejercicio 16
-
-```rust
-pub fn gasolineras(p: & Vec<i32>, mut c: i32) -> Vec<i32>{
-    let mut sol: Vec<i32> = vec![];
-    let c_og = c;
-    for i in 0..p.len()-1{
-        if p[i+1]-p[i] <= c {
-            c = c - (p[i+1]-p[i]); // todavia alcanza asi que gasto nafta hasta sgte parada
-        }
-        else{
-            sol.push(p[i]);
-            c = c_og - (p[i+1]-p[i]); // cargo nafta y gasto hasta la sgte parada
-        }
-    }
-    return sol;
-}
-```
-
-
-
-
