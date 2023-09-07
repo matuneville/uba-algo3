@@ -24,7 +24,7 @@ Primero, hay que fijar algo trivial: que, dado el mínimo natural que no se encu
 
 Hay dos posibilidades acerca de nuestro $X$:
 
-**Caso 1**: Que contenga todos los naturales de $0...n$, siendo $n$ el tamaño del conjunto $X$. Entonces, como $mex(Y)$ siempre estará acotada por el primer número que no esté en un conjunto $Y$, la idea para maximizar la suma es siempre agarrar el mínimo numero del conjunto $X$ para que $mex(Y)$ no pueda estar acotado por un número que no sea el máximo elemento (es decir, el último agregado a mi solución). Entonces, dada la solución parcial $Y_i \subseteq X_i$:
+**Caso 1**: Que contenga todos los naturales de $0...n$, siendo $n$ el tamaño del conjunto $X$. Entonces, como $mex(Y)$ siempre estará acotada por el primer número que no esté en un conjunto $Y$, la idea para maximizar la suma es siempre agarrar el mínimo numero del conjunto $X$ para que $mex(Y)$ no pueda estar acotado por un número que no sea el máximo elemento (es decir, el último agregado a mi solución). Entonces, dada la solución parcial $Y_i \subseteq X_i$ en la iteración o recursión $i$:
 
 - si le agrego un número $x$ tal que $x \neq Min(X)$, entonces $mex(Y_{i+1}) = Max(Y_i) + 1 < x$
 
