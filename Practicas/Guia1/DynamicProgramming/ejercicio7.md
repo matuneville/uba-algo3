@@ -42,3 +42,6 @@ pub fn astro_dp_topdown(asteroides: & Vec<i32>) -> i32 {
 Su **complejidad temporal** está dada por $\text{cantidad de estados posibles} \times \text{calcular cada nodo}$, que da como resultado $O(dias \times asteroides)$, que con las variables dadas por la consigna quedaría en $O(j\times c)$.  
 
 La **complejidad espacial** está dada por la matriz de memoización de tamaño $j^2$, y las $k$ veces en las que se guardan copias de $j$ y $c$, por lo que la complejidad queda $O(j^2 + k)$
+
+### Ítem E
+

@@ -1,8 +1,8 @@
-mod guia1 {pub mod ejercicios_greedy; }
-use guia1::ejercicios_greedy::*;
+mod guia1 {pub mod ejercicios_dp; }
+use guia1::ejercicios_dp::*;
 
 fn main() {
-    let s = vec![0,3,4,7,10,11,16,21,25,26,27,30];
+    let s = vec![3, 2, 5, 6];
 
-    println!("{:?}", gasolineras(& s, 5));
+    println!("{:?}", astro_dp_topdown(& s));
 }
