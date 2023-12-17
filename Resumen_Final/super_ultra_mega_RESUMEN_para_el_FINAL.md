@@ -69,7 +69,8 @@ El backtracking es eficiente para este problema porque evita explorar combinacio
 
 Se divide el problema principal en pequeños subproblemas que se resuelven recursivamente.  
 
-Ejemplo de cálculo de coeficientes binomiales
+Ejemplo de cálculo de coeficientes binomiales:  
+
 $$
 \
 \binom{n}{k} = \frac{n!}{k!(n-k)!}
@@ -79,7 +80,8 @@ $$
 
 No es buena idea computar esta definición directamente (¿por qué?).  
 
-Teorema para el cálculo de coeficientes binomiales
+Teorema para el cálculo de coeficientes binomiales:  
+
 $$
 \
 \binom{n}{k} =
@@ -128,9 +130,9 @@ algoritmo combinatorio(n, k)
 
 Por definición:
 
-- Complejidad $O(n)$. _¡Ojo! el tamaño de entrada es $O(\log n!)$_.
+- Complejidad $O(n)$. ¡Ojo! el tamaño de entrada es $O(log\ n!)$.
     - Inconvenientes: inestabilidad numérica y/o manejo de enteros muy grandes.
-    - Función recursiva:
+    - Función recursiva
 
 - Complejidad $\Omega\left( {n \choose k} \right)$.
 
@@ -222,7 +224,7 @@ Un **grafo** modela relaciones entre nodos o vértices, mediante ejes o aristas,
 1. **Teorema:** Dado un grafo $G = (V, E)$, la suma de los grados de sus vértices es igual a 2 veces el número de aristas. 
 2. **Def:** Un grafo $G = (V, E)$ se dice bipartito  si existen dos subconjuntos de vértices $V_1,  V_2$ tal que
    - $V = V_1 \cup V_2$
-   - $V_1 \cap V_2 = \empty$
+   - $V_1 \cap V_2 = \emptyset$
    - $\forall e = (u,v) \in E, u \in V_1 \land v \in V_2$
 3. **Teorema:** Un grafo es bipartito $\iff$ no tiene ciclos de longitud impar.
 4. **Def:** Dados $G=(V,E)$ y $G’=(V’,E’)$ son isomorfos si existe una función biyectiva $f: V \rightarrow V$, tal que para todo $u,v \in V, (u,v) \in E \iff (f(u),f(v)) \in E’$, siendo $f$ función de isomorfismo.  
@@ -531,7 +533,7 @@ DIJKSTRA(G, w, s)
                 DECREASE-KEY(Q, v, v.d) # si el camino es mas corto, atualizo distancia
 ```
 
-Complejidad: $O(n^2)$ o $O(m\ log \n)$
+Complejidad: $O(n^2)$ o $O(m\ log\ n)$
 
 
 ### ALgoritmo de Bellman-Ford
@@ -586,7 +588,7 @@ FLOYD(G):
 ### Algoritmo de Dantzig  
 
 En la iteración $k$, el algoritmo de Dantzig genera una matriz de $k \times k$ de caminos mínimos en el subgrafo inducido
-por los vértices $\{v_1, . . . , v_k\}.
+por los vértices $\{v_1, . . . , v_k\}$.
 
 
 ## Flujo en redes
@@ -671,19 +673,13 @@ Complejidad $O(nm^2)$
 
 ### Matching máximo en grafos bipartitos
 
-- Un matching o correspondencia entre los vértices de $G$, es un
-conjunto $M ⊆ E$ de aristas de G tal que para todo $v ∈ V$, $v$
-es incidente a lo sumo a una arista de $M$.
+- Un matching o correspondencia entre los vértices de $G$, es un conjunto $M ⊆ E$ de aristas de G tal que para todo $v ∈ V$, $v$ es incidente a lo sumo a una arista de $M$.
 
-- El problema de matching máximo consiste en encontrar un
-matching de cardinal máximo entre todos los matchings de $G$.
+- El problema de matching máximo consiste en encontrar un matching de cardinal máximo entre todos los matchings de $G$.
 
-- El problema de matching máximo es resoluble en tiempo
-polinomial para grafos en general (Edmonds, 1961–1965).
+- El problema de matching máximo es resoluble en tiempo polinomial para grafos en general (Edmonds, 1961–1965).
 
-- Pero en el caso de grafo bipartitos, podemos enunciar un
-algoritmo más simple transformándolo en un problema de flujo
-máximo en una red.  
+- Pero en el caso de grafo bipartitos, podemos enunciar un algoritmo más simple transformándolo en un problema de flujo máximo en una red.  
 
 Dado el grafo bipartito $G = (V1 ∪ V2, E)$ definimos la siguiente red $N = (V', E')$:
 - $V' = V1 \cup V2 \cup \{s,t\}$, con $s$ y $t$ dos vértices ficticios representando la fuente y el sumidero de la red.
@@ -695,8 +691,7 @@ Dado el grafo bipartito $G = (V1 ∪ V2, E)$ definimos la siguiente red $N = (V'
 - $uij = 1$ para todo $ij \in E$.  
 
 
-El cardinal del matching máximo de $G$ será igual al valor del flujo
-máximo en la red $N$.
+El cardinal del matching máximo de $G$ será igual al valor del flujo máximo en la red $N$.
 
 ## Complejidad computacional, P vs NP
 
