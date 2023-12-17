@@ -753,7 +753,7 @@ La complejidad de una DTM está dada por la cantidad de movimientos de la cabeza
 
 Un problema está en P si existe una DTM de complejidad polinomial que lo resuelve.  
 
-- P = $\{ \pi$ tq $\exists M$ DTM tq $M$ resuelve $\pi$ y $T_M(n) \in O(p(n))$ para algún polinomio p $\}$  
+- P = { $\pi$ tq $\exists M$ DTM tq $M$ resuelve $\pi$ y $T_M(n) \in O(p(n))$ para algún polinomio $p$ }  
 
 Existen otros modelos de computadoras determinísticas (máquina de Turing con varias cintas, Random Access Machines, etc.) pero puede probarse que son equivalentes en términos de la polinomialidad de los problemas a la DTM.  
 
