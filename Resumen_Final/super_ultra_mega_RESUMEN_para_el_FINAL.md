@@ -61,6 +61,8 @@ algoritmo BT(a, k)
     retornar
 ```
 
+#### Knapsack problem
+
 Un ejemplo es el *knapsack problem*, o problema de la mochila, un problema de optimización combinatoria que busca la mejor combinación de objetos con diferentes pesos y valores para incluir en una mochila, de manera que el valor total sea máximo y el peso no exceda la capacidad máxima de la mochila.  pod
 
 El backtracking es eficiente para este problema porque evita explorar combinaciones que claramente no conducirán a la solución óptima, reduciendo así el espacio de búsqueda, como por ejemplo evaluar soluciones que se exceden del peso permitido. 
