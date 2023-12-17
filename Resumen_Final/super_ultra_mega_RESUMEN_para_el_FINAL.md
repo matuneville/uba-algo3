@@ -618,4 +618,226 @@ La capacidad de un corte $S$ se define como la suma de las capacidades salientes
 
 - Proposición 2: Si $x$ es un flujo con valor $F$ y $S$ es un corte en $N$, entonces $F \leq u(S)$.
 
-> Corolario (**certificado de optimalidad**): Si $F$ es el valor de un flujo $x$ y $S$ un corte en $G$ tal que $F = u(S)$ entonces $x$ define un flujo máximo y $S$ un corte de capacidad mínima.
+> Corolario (**certificado de optimalidad**): Si $F$ es el valor de un flujo $x$ y $S$ un corte en $G$ tal que $F = u(S)$ entonces $x$ define un flujo máximo y $S$ un corte de capacidad mínima.  
+
+
+Más formalmente, para una red $G=(N,A)$ con fuente $s$ y sumidero $t$, y un flujo factible $f$, para todo $v,w \in N$ definimos su **capacidad residual** $u_f(v,w)$ como:  
+
+$$
+u_f(v,w) = 
+\begin{cases} 
+u(v,w) - f(v,w) & \text{si } (v,w) \in A \\
+f(v, u) & \text{si } (w,v) \in A \\
+0 & \text{de lo contrario}
+\end{cases}
+$$  
+
+La **red residual** $R(G,f)$ es la red inducida por las capacidades $u_f$ del grafo $G$ con flujo factible $f$.  
+
+Un **camino de aumento** es un camino orientado de $s$ a $t$ en $R(G,x)$.  
+
+- Teorema: Sea $f$ un flujo definido sobre una red N. Entonces $f$ es un flujo máximo $\iff$ no existe camino de aumento en $R(G, f)$.  
+
+
+- Teorema (**max flow-min cut**): Dada una red $N$, el valor del flujo máximo es igual a la capacidad del corte mínimo.
+
+### Método Ford-Fulkerson
+
+```
+ALGORITMO FORD-FULKERSON(G, s, t)
+    para cada arista (u, v) en G.E
+        (u, v).f = 0
+    mientras exista un camino p desde s hasta t en la red residual Gf
+        cf(p) = min {cf(u, v) | (u, v) está en p}
+        para cada arista (u, v) en p
+            si (u, v) está en G.E
+                (u, v).f = (u, v).f + cf(p)
+            sino
+                (v, u).f = (v, u).f - cf(p)
+    return f
+```
+
+- **Teorema**: Si las capacidades de los arcos de la red son enteras, entonces el problema de flujo máximo tiene un flujo máximo entero.
+- **Teorema**: Si los valores del flujo inicial y las capacidades de los arcos de la red son enteras, entonces el método de Ford y Fulkerson realiza a lo sumo $nU$ iteraciones, donde $U$ es una cota superior finita para el valor de las capacidades.
+- Si las capacidades o el flujo inicial son números irracionales, el método de Ford y Fulkerson puede no parar (es decir, realizar un número infinito de pasos).  
+
+Complejidad $O(nF)$, siendo $F$ el flujo máximo posible.
+
+### Algoritmo de Edmond-Karp  
+
+Sigue el método de Ford-Fulkerson, pero utilizando BFS para hallar el camino de aumento en cada iteración.  
+
+Complejidad $O(nm^2)$
+
+### Matching máximo en grafos bipartitos
+
+- Un matching o correspondencia entre los vértices de $G$, es un
+conjunto $M ⊆ E$ de aristas de G tal que para todo $v ∈ V$, $v$
+es incidente a lo sumo a una arista de $M$.
+
+- El problema de matching máximo consiste en encontrar un
+matching de cardinal máximo entre todos los matchings de $G$.
+
+- El problema de matching máximo es resoluble en tiempo
+polinomial para grafos en general (Edmonds, 1961–1965).
+
+- Pero en el caso de grafo bipartitos, podemos enunciar un
+algoritmo más simple transformándolo en un problema de flujo
+máximo en una red.  
+
+Dado el grafo bipartito $G = (V1 ∪ V2, E)$ definimos la siguiente red $N = (V', E')$:
+- $V' = V1 \cup V2 \cup \{s,t\}$, con $s$ y $t$ dos vértices ficticios representando la fuente y el sumidero de la red.
+
+- $E' = \{(i, j) : i \in V_1, j \in V_2, ij \in E\}
+\cup \{(s, i) : i \in V_1\}
+\cup \{(j,t) : j \in V_2\}$.
+
+- $uij = 1$ para todo $ij \in E$.  
+
+
+El cardinal del matching máximo de $G$ será igual al valor del flujo
+máximo en la red $N$.
+
+## Complejidad computacional, P vs NP
+
+Un **algoritmo eficiente** es un algoritmo de **complejidad polinomial**.  
+
+Un problema está bien resuelto si se conocen algoritmos eficientes para resolverlo.  
+
+El objetivo es clasificar los problemas según su complejidad.  
+
+Una **instancia** de un problema es una especificación de sus parámetros. Un problema de decisión $\pi$ tiene asociado un conjunto $D_\pi$ de instancias y un subconjunto $Y_\pi ⊆ D_\pi$ de instancias cuya respuesta es SÍ.   
+
+Dada una instancia $I$ del problema $\pi$:
+- **Versión de evaluación**: Determinar el valor de una solución óptima de $\pi$ para $I$.
+- **Versión de optimización**: Encontrar una solución óptima del problema $\pi$ para $I$ (de valor mínimo o máximo).
+- **Versión de decisión**: Dado un número $k$, ¿existe una solución factible de $\pi$ para $I$ tal que $c(S) \leq k$ si el problema es de minimización (o $c(S) \geq k$ si el problema es de maximización)?
+- **Versión de localización**: Dado un número $k$, determinar una solución factible de $\pi$ para $I$ tal que $c(S) \leq k$.  
+
+Ejemplo: TSP  
+
+Dado un grafo completo $G$ con longitudes asignadas a sus aristas:
+- **Versión de evaluación**: Determinar el valor de una solución óptima, o sea la longitud de un circuito Hamiltoniano de $G$ de longitud mínima.
+- **Versión de optimización**: Determinar un circuito Hamiltoniano de $G$ de longitud mínima.
+- **Versión de decisión**: Dado un número $k$, ¿existe un circuito Hamiltoniano de $G$ de longitud menor o igual a $k$?
+- **Versión de localización**: Dado un número $k$, determinar un circuito Hamiltoniano de $G$ de longitud menor o igual a $k$.
+
+
+**Problemas intratables**: Un problema es intratable si no puede ser resuelto por algún algoritmo eficiente.  
+
+Un problema puede ser intratable por distintos motivos:
+- El problema requiere una respuesta de longitud exponencial (ejemplo: pedir todos los circuitos Hamiltonianos de longitud a lo sumo $k$).
+- El problema es indecidible (ejemplo: problema de la parada).
+- El problema es decidible pero no se conocen algoritmos polinomiales que lo resuelvan.
+
+#### Modelos de Computadoras
+
+**Máquina de Turing Determinística** (DTM): Consiste de un control finito, una cabeza lectora-escritora y una cinta con el siguiente esquema.
+- Control: corre sobre la cinta
+- Cabeza lectora-escritora: lee-escribe en la cinta
+- Cinta
+
+Donde:
+- $\sum$ finito, el alfabeto; $\Gamma = \Sigma \cup \{\ast\}$;
+- $Q$ finito, el conjunto de estados;
+- $q_0 \in Q$, estado inicial; $Q_f \subseteq Q$, estados finales ($q_{si}$ y $q_{no}$ para problemas de decisión)
+
+Sobre la cinta tengo escrito el input que es un string de símbolos de $\sum$ a partir de la celda 1, y el resto de las celdas tiene $\ast$ (blancos).  
+
+Definimos un programa $S$ como un conjunto de quíntuplas $S \subseteq Q \times \Gamma \times Q \times \Gamma \times M$, donde $M = \{+1, -1\}$ son los movimientos de la cabeza a derecha o izquierda.  
+
+**Para todo par $(q_i, s_j)$, existe exactamente una quíntupla que comienza con ese par (máquina determinística).**  
+
+¿Qué significa la quíntupla $(q_i, s_h, q_j, s_k, +1)$? Significa que si estando en el estado $q_i$ la cabeza lee $s_h$, entonces escribe $s_k$, se mueve a la derecha y pasa al estado $q_j$.  
+
+Una máquina $M$ resuelve el problema $\pi$ si para toda instancia empieza, termina y contesta bien.  
+
+La complejidad de una DTM está dada por la cantidad de movimientos de la cabeza, desde el estado inicial hasta alcanzar un estado final, en función del tamaño de la entrada.  
+
+### Clase P
+
+Un problema está en P si existe una DTM de complejidad polinomial que lo resuelve.  
+
+- P = {$\pi$ tq $\exists M$ DTM tq $M$ resuelve $\pi$ y $T_M(n) \in O(p(n))$ para algún polinomio p}  
+
+Existen otros modelos de computadoras determinísticas (máquina de Turing con varias cintas, Random Access Machines, etc.) pero puede probarse que son equivalentes en términos de la polinomialidad de los problemas a la DTM.  
+
+**Máquinas de Turing No Determinísticas** (NDTM):
+
+- No se pide unicidad de la quíntupla que comienza con cualquier par $(q_i, s_j)$.  
+
+- En caso de que hubiera más de una quíntupla, la máquina se replica continuando cada una por una rama distinta.
+
+- Decimos que una NDTM resuelve el problema $\pi$ si para toda instancia de $Y_{\pi}$ existe una rama que llega a un estado final $q_{si}$ y para toda instancia en $D_{\pi} \backslash Y_{\pi}$ ninguna rama llega a un estado final $q_{si}$.  
+
+- Una NDTM es polinomial para $\pi$ cuando existe una función polinomial $T(n)$ de manera que para toda instancia de $Y_{\pi}$ de tamaño $n$, alguna de las ramas termina en estado $q_{si}$ en a lo sumo $T(n)$ pasos.  
+
+- Un problema $\pi \in NP$ si existe una NDTM polinomial que resuelve $\pi$.
+
+### Clase NP
+
+Equivalentemente, un problema de decisión pertenece a la clase NP si dada una instancia de SÍ y evidencia de la misma, puede ser verificada en tiempo polinomial. Esa evidencia a veces se llama certificado, y tiene que tener tamaño polinomial en el tamaño de la entrada.  
+
+> **Lema**: Si $\pi$ es un problema de decisión que pertenece a la clase NP, entonces $\pi$ puede ser resuelto por un algoritmo determinístico en **tiempo exponencial** respecto del tamaño de la entrada.  
+
+NP-completitud: Reducción polinomial: Sean $\pi$ y $\pi '$ dos problemas de decisión. Decimos que $f : D_{\pi '} \rightarrow D_{\pi}$ es una reducción polinomial de $\pi '$ en $\pi$ si $f$ se computa en tiempo polinomial y para todo $d \in D_{\pi '}$, $d \in Y_{\pi '} \iff f(d) \in Y_{\pi}$. Notación: $\pi ' \leq \pi$.  
+
+Un problema $\pi$ es NP-completo si:
+1. $\pi \in$ NP.
+2. Para todo $\pi ' \in$ NP, $\pi ' \leq \pi$.
+
+Si un problema $\pi$ verifica la condición 2., $\pi$ es NP-Hard (es al menos tan “difícil” como todos los problemas de NP).  
+
+
+**Conjeturas**:
+- Si existe un problema en NP-c $\cap$ P, entonces P=NP.
+- Si existe un problema en NP \ P, entonces P $\neq$ NP
+
+
+### Problema de SAT: Teorema de Cook
+
+El problema SAT consiste en decidir si, dada una fórmula lógica $\phi$ expresada como conjunción de disyunciones (ej: $\phi = x_1 \land (x_2 \lor \neg x_1) \land (x_3 \lor \neg x_4 \lor x_1)$), existe una valuación de sus variables que haga verdadera $\phi$.
+
+Teorema de Cook (1971): SAT es NP-completo.
+
+La demostración de Cook es directa: considera un problema genérico $\pi \in$ NP y una instancia genérica $d \in D_\pi$. A partir de la hipotética NDTM que resuelve $\pi$, genera en tiempo polinomial una fórmula lógica $\phi_{\pi,d}$ en forma normal (conjunción de disyunciones) tal que $d \in Y_\pi$ si y sólo si $\phi_{\pi,d}$ es satisfactible.  
+
+A partir del Teorema de Cook, la técnica estándar para probar que un problema $π$ es NP-completo aprovecha la transitividad, y consiste en lo siguiente:
+1. Mostrar que $π$ está en NP.
+2. Elegir un problema $π'$ apropiado que se sepa que es NP-completo.
+3. Construir una reducción polinomial $f$ de $π'$ en $π$.
+
+
+#### Ejemplo: Reducción SAT a 3-SAT
+
+El problema 3-SAT es una variante del problema SAT, en el cual cada cláusula tiene exactamente tres literales. Como es una restricción del dominio de SAT, está en NP, y en principio es "no más difícil" que SAT.  
+
+Para probar que 3-SAT es NP-completo, vamos entonces a reducir SAT a 3-SAT.  
+
+Tomemos una instancia genérica de SAT $ϕ = C_1 ∧ ... ∧ C_m$. Vamos a reemplazar cada $C_i$ por una conjunción de disyunciones $ϕ'_i$, donde cada disyunción tenga tres literales, y de manera que $ϕ$ sea satisfactible si y sólo si $ϕ_1 ∧ ... ∧ ϕ_m$ lo es.  
+
+- Si $C_i$ tiene tres literales, queda como está.
+- $C_i$ tiene menos de tres literales, agregamos nuevas variables como en el ejemplo: $(x1 ∨ ¬x2) → (x1 ∨ ¬x2 ∨ y) ∧ (x1 ∨ ¬x2 ∨ ¬y)$
+- Si $C_i$ tiene cuatro o más literales, agregamos nuevas variables como en el ejemplo:
+$(x1 ∨ ¬x2 ∨ x3 ∨ x4 ∨ ¬x5) → (x1 ∨ ¬x2 ∨ y1) ∧ (¬y1 ∨ x3 ∨ y2) ∧ (¬y2 ∨ x4 ∨ ¬x5)$
+
+### Clase Co-NP
+
+Un problema de decisión pertenece a la clase Co-NP si dada una instancia de NO y evidencia de la misma, puede ser verificada en tiempo polinomial.  
+
+El problema $π^c$ tiene respuesta NO si y solo si $π$ tiene
+respuesta SI.  
+
+Co-NP es la clase de los problemas complemento de los problemas de la clase NP. Y la clase de problemas P está contenida también en Co-NP.  
+
+Es una incógnita si Co-NP = NP, o si P = Co-NP $\cup$ NP
+
+#### Extensión de un problema
+
+El problema $π$ es una restricción de un problema $π'$ si el dominio de $π$ está incluido en el de $π'$.  
+
+Se dice que $π'$ es una extensión de $π$. Si $π$ ∈ NP-Completo, entonces $π'$ ∈ NP-Difícil.  
+
+Ejemplos:
+- Viajante de comercio es una extensión de Circuito Hamiltoniano
+- 3-SAT es una restricción de SAT
