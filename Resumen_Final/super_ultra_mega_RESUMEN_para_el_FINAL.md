@@ -211,8 +211,9 @@ Una solución greedy sería centrarse en elegir las monedas más grandes para ll
 
 #### Problema de espera total en un sistema
 
-El objetivo es, dado un conjunto de clientes que tienen un tiempo de atención asocidado, determinar en qué orden se deben atender los clientes para minimizar la suma de los tiempos de espera de los clientes. Una solución greedy sería, en cada paso, atender al cliente pendiente que tenga menor tiempo de espera.
+El objetivo es, dado un conjunto de clientes que tienen un tiempo de atención asocidado, determinar en qué orden se deben atender los clientes para minimizar la suma de los tiempos de espera de los clientes. Una solución greedy sería, en cada paso, atender al cliente pendiente que tenga menor tiempo de espera.  
 
+> Teorema: El algoritmo goloso por menor tiempo de atención proporciona una solución óptima del problema de minimizar el tiempo total de espera en un sistema.
 
 ## Teoría de Grafos
 
