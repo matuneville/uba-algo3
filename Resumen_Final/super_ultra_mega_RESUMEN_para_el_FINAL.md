@@ -791,7 +791,7 @@ Si un problema $\pi$ verifica la condición 2., $\pi$ es NP-Hard (es al menos ta
 
 ### Problema de SAT: Teorema de Cook
 
-El problema SAT consiste en decidir si, dada una fórmula lógica $\phi$ expresada como conjunción de disyunciones (ej: $\phi = x_1 \land (x_2 \lor \neg x_1) \land (x_3 \lor \neg x_4 \lor x_1)$), existe una valuación de sus variables que haga verdadera $\phi$.
+El problema SAT consiste en decidir si, dada una fórmula lógica $\phi$ expresada como conjunción de disyunciones (ej: $\phi = x_1 \land (x_2 \lor \neg x_1) \land (x_3 \lor \neg x_4 \lor x_1)$ ), existe una valuación de sus variables que haga verdadera $\phi$.
 
 Teorema de Cook (1971): SAT es NP-completo.
 
