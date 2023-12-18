@@ -557,8 +557,8 @@ DIJKSTRA(G, w, s)
                 DECREASE-KEY(Q, v, v.d) # si el camino es mas corto, atualizo distancia
 ```  
 
-- En cada iteración agrega un nuevo vértice a $S$, por lo tanto termina en a lo sumo $n$ iteraciones.  
-- El costo de cada iteración es $O(n + d(j))$ u $O(log\ n + d(j)\ log\ n)$ según cómo se implemente $S$. Como $j$ recorre como mucho $V$, el costo total del algoritmo es $O(n^2)$ u $O((m + n) log\ n)$, respectivamente.  
+- En cada iteración se quita un elemento de $Q$, por lo tanto termina en a lo sumo $n$ iteraciones.  
+- El costo de cada iteración es $O(n + d(j))$ u $O(log\ n + d(j)\ log\ n)$ según cómo se implemente $Q$. Como $j$ recorre como mucho $V$, el costo total del algoritmo es $O(n^2)$ u $O((m + n) log\ n)$, respectivamente.  
 
 Complejidad final: $O(n^2)$ o $O(m\ log\ n)$
 
