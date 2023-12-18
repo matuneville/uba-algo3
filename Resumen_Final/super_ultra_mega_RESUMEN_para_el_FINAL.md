@@ -422,11 +422,13 @@ Una implementación en $O(m\ log\ n)$ es la siguiente:
 
 ```py
 PRIM ( r , G ) :
+    Q = min_heap {}
     for u in V:         # O(n)
         u.key = Inf
         u.parent = None
+        Q.insert(u)
+        
     r.key = 0
-    Q = array_to_heap(V) # O(n) armo min-heap
 
     while not Q.empty :
         u = EXTRACT-MIN(Q)  # O(log n) entre el while y el extract
@@ -435,30 +437,34 @@ PRIM ( r , G ) :
                 v.parent = u
                 v.key = w(u,v)
                 DECREASE-KEY(Q, v, w(u,v)) # O(log n)
-
 ```
 
 Donde la `key` de cada vértice se refiere al menor peso conocido desde cualquier vértice en el árbol generador actual hasta dicho vértice
 
 #### Correctitud de Prims
 
-En cada iteración de $while$, se extrae un nodo $u$ de $Q$ y quedan congelado tanto el valor de $u.parent$ como el de $u.key$. Luego de dos iteraciones, $u.parent$ es un vecino de $u$ fuera $Q$, llamamos $e_i = (u, u.parent)$ y $u.key = w(e_i)$. Por lo tanto, cuando termina el algoritmo, se obtiene $T\ast=(e_2, ..., e_n)$.  
+Sea $G$ un grafo conexo y ponderado.  
 
-Es fácil de ver por inducción que después de completar la iteración $i$, las primeras $i-1$ aristas de $T\ast$ conectan a todos los nodos fuera de $Q$. Entonces $T\ast$ es AG de $G$.  
+En toda iteración del algoritmo de Prim, se debe encontrar una arista que conecte un nodo del subgrafo a otro nodo fuera del subgrafo.  
 
-Ahora probemos que $T\ast$ es AGM de $G$. Supongamos que no lo es, entonces dado cualquier AGM $T$ de $G$, definimos $dif(T\ast, T) = min(j\ tq\ e_j \in T\ast \backslash T)$.  
+Ya que $G$ es conexo, siempre habrá un camino para todo nodo.  
 
-Sea $P_{ab}$ el camino simple que une $a$ con $b$ en $T$. Sin pérdida de generalidad, al comienzo de la iteración $k$ tenemos $a \in Q, b \notin Q, a.parent = b, a.key = w(e_k)$ y más adelante se elige $u=a$.  
+La salida $Y$ del algoritmo de Prim es un árbol porque las aristas y los nodos agregados a $Y$ están conectados.  
 
-Podemos afirmar que existe una arista $f=(x,y) \in P_{ab}$ tq $x \in Q, y \notin Q$ ya que $a \in Q, b \notin Q$.  
+Sea $Y_{1}$ el árbol recubridor mínimo de $G$.  
 
-Consideramos ahora $T' = T + e_k - f$, que es AG porque $P_{ab} + e_k$ es un ciclo y $f$ está en ese ciclo.  
+Si $Y_{1} = Y \Rightarrow Y$ es el árbol recubridor mínimo.  
 
-Por otro lado, $w(f) \geq x.key \geq a.key = w(e_k)$ pues se había considerado $w(f)$ para determinar el valor de $x.key$ cuado $y$ fue sacado de $Q$ y se iba a elegir $a$ en la interación $k$ en lugar de $x$.   
+Si no, sea $e=(u,v)$ la primera arista agregada durante la construcción de $Y$, que no está en $Y_{1}$ y sea $V'$ el conjunto de nodos conectados por las aristas agregadas antes que $e$ (las del subgrafo formado hasta el momento). Entonces un extremo de $e$ está en $V'$ y el otro no. Ya que $Y_{1}$ es el árbol recubridor mínimo de $G$, existe un camino en $Y_{1}$ que une $u$ y $v$, ya que es un árbol generador de un grafo conexo. Si vemos dicho camino de $Y_1$, existe una arista $f$ uniendo un nodo en $V'$ a uno que no está en $V'$. En la iteración que $e$ se agrega a $Y$, $f$ también se podría haber agregado y se hubiese agregado en vez de $e$ si su peso fuera menor que el de $e$. Ya que $f$ no se agregó se concluye:  
 
-Por lo tanto, $w(T') \leq w(T)$, pero como $T$ es AGM, entonces $w(T') = w(T)$. $T'$ sería otro AGM de $G$.  
+$$
+P(f) \geq P(e)
+$$
 
-$T'$ ahora contiene a $e_k$ pero también conserva las aristas $e_2, ..., e_{k-1}$, ya que tienen sus ambos extremos fuera de $Q$. Entonces $dif(T\ast, T') > k = dif(T\ast, T)$, contradicción.
+Sea $Y_{2}$ el grafo obtenido al remover $f$ y agregando $e$ a $Y_{1}$. Es fácil mostrar que $Y_{2}$ conexo tiene la misma cantidad de aristas que $Y_{1}$, y el peso total de sus aristas no es mayor que el de $Y_{1}$, entonces también es un árbol recubridor mínimo de $G$ y contiene a $e$ y todas las aristas agregadas anteriormente durante la construcción de $V$. Si se repiten los pasos mencionados anteriormente, eventualmente se obtendrá el árbol recubridor mínimo de $G$ que es igual a $Y$.  
+
+Esto demuestra que $Y$ es el árbol recubridor mínimo de $G$.  
+
 
 
 ### Kruskal
