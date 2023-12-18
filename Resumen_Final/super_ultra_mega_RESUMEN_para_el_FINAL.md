@@ -492,7 +492,19 @@ KRUSKAL ( G ) :
 
 #### Correctitud de Kruskal
 
-La demostración de correctitud de Kruskal es muy similar a la de Prim. En cada iteración, el grafo que arma el algoritmo es un bosque, ya que no contiene circuitos. Al finalizar la última iteración, como se incorporaron $n−1$ aristas, pasa a ser árbol (sin circuitos y con $m−1$ aristas). Esto junto a la siguiente proposición demuestra la correctitud de Kruskal.
+Sea $G$ un grafo conexo y pesado, y $Y$ el subgrafo de $G$ producido por el algoritmo. $Y$ no puede tener un ciclo, ya que por definición no se agrega un eje si resulta en un ciclo. $Y$ no puede estar desconectado, ya que el primer eje encontrado que une dos componentes de $Y$ habría sido agregado por el algoritmo. Por lo tanto, $Y$ es un árbol generador de $G$.
+
+Veamos que es mínimo.  
+Probemos que la proposición $P$ es verdadera por inducción:
+- Si $F$ es el conjunto de ejes elegidos en cualquier etapa del algoritmo, entonces existe algún árbol generador mínimo que contiene $F$ y ninguno de los ejes rechazados por el algoritmo.  
+
+- Claramente $P$ es verdadero al principio, cuando $F$ está vacío: cualquier AGM servirá, y existe uno porque un grafo conectado ponderado siempre tiene un AGM.  
+
+- Ahora asumamos que $P$ es verdadero para algún conjunto de ejes $F$ y sea $T$ un AGM que contiene $F$.
+    - Si el siguiente eje elegido $e$ también está en $T$, entonces $P$ es verdadero para $F + e$.
+    - De lo contrario, si $e$ no está en $T$, entonces $T + e$ tiene un ciclo $C$. Este ciclo contiene ejes que no pertenecen a $F$, ya que $e$ no forma un ciclo cuando se agrega a $F$ pero sí en $T$. Sea $f$ un eje que está en $C$ pero no en $F + e$. Se ve fácilmente que $f$ también pertenece a $T$, y por $P$, no ha sido considerado por el algoritmo. Por lo tanto, $f$ debe tener un peso mayor o igual a $e$. Entonces $T - f + e$ es un árbol, con peso menor o igual a $T$. Sin embargo, dado que $T$ es un AGM, entonces este nuevo grafo tiene el mismo peso que $T$, de lo contrario obtenemos una contradicción y $T$ no sería un AGM. Entonces $T - f + e$ es un AGM que contiene $F + e$ y nuevamente $P$ se mantiene.
+- Por lo tanto, por el principio de inducción, $P$ se mantiene cuando $F$ se ha convertido en un árbol generador, lo cual solo es posible si $F$ ya es un AGM.
+
 
 ## Camino mínimo
 
