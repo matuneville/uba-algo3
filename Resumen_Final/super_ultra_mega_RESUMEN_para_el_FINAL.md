@@ -596,8 +596,9 @@ Complejidad: $O(nm)$
 
 El algoritmo de Floyd calcula el camino mínimo entre todo par de vértices de un digrafo pesado. Utiliza la técnica de programación dinámica.  
 
-Al finalizar la iteración $k$ del algoritmo de Floyd, $d[i][j]$ es la longitud de los caminos mínimos desde $v_i$
-a $v_j$ cuyos vértices intermedios son elementos de $\{v_1, . . . , vk\}$.
+Al finalizar la iteración $k$ del algoritmo de Floyd, $d[i][j]$ es la longitud de los caminos mínimos desde $v_i$ a $v_j$ cuyos vértices intermedios son elementos de $\{v_1, . . . , vk\}$.  
+
+Este algoritmo permite trabajar corrigiendo sobre la misma matriz.
 
 ```py
 FLOYD(G):
@@ -614,8 +615,10 @@ FLOYD(G):
 
 ### Algoritmo de Dantzig  
 
-En la iteración $k$, el algoritmo de Dantzig genera una matriz de $k \times k$ de caminos mínimos en el subgrafo inducido
-por los vértices $\{v_1, . . . , v_k\}$.
+A diferencia del invariante de Floyd, en la iteración $k$, el algoritmo de Dantzig genera una matriz de $k \times k$ de caminos mínimos en el subgrafo inducido por los vértices $\{v_1, . . . , v_k\}$.  
+
+Este algoritmo permite trabajar corrigiendo sobre la misma matriz.
+
 
 
 ## Flujo en redes
