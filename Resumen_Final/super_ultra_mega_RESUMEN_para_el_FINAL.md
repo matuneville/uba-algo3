@@ -495,8 +495,9 @@ KRUSKAL ( G ) :
 Sea $G$ un grafo conexo y pesado, y $Y$ el subgrafo de $G$ producido por el algoritmo. $Y$ no puede tener un ciclo, ya que por definición no se agrega un eje si resulta en un ciclo. $Y$ no puede estar desconectado, ya que el primer eje encontrado que une dos componentes de $Y$ habría sido agregado por el algoritmo. Por lo tanto, $Y$ es un árbol generador de $G$.
 
 Veamos que es mínimo.  
-Probemos que la proposición $P$ es verdadera por inducción:
-- Si $F$ es el conjunto de ejes elegidos en cualquier etapa del algoritmo, entonces existe algún árbol generador mínimo que contiene $F$ y ninguno de los ejes rechazados por el algoritmo.  
+Probemos que la proposición $P$ es verdadera por inducción:  
+
+$P$ : Si $F$ es el conjunto de ejes elegidos en cualquier etapa del algoritmo, entonces existe algún árbol generador mínimo que contiene $F$ y ninguno de los ejes rechazados por el algoritmo.  
 
 - Claramente $P$ es verdadero al principio, cuando $F$ está vacío: cualquier AGM servirá, y existe uno porque un grafo conectado ponderado siempre tiene un AGM.  
 
@@ -530,7 +531,9 @@ que para todo $v \in W$, el camino de $s$ a $v$ en $T$ es un camino mínimo de $
 
 ### Algoritmo de Dikstra-Moore  
 
-Es un algoritmo goloso que construye un árbol de caminos mínimos (un árbol enraizado en $s$ conteniendo un camino mínimo desde $s$ hacia todo otro vértice de $V$), comenzando con el vértice $s$ y agregando un vértice a este árbol en cada iteración. Es goloso porque en cada iteración agrega el vértice más cercano a $s$ de entre todos los que todavía no fueron agregados al árbol. Es decir, en la iteración $k$ agrega al árbol de caminos mínimos el $k$-ésimo vértice más cercano a $s$.  
+Es un algoritmo goloso que construye un árbol de caminos mínimos (un árbol enraizado en $s$ conteniendo un camino mínimo desde $s$ hacia todo otro vértice de $V$), comenzando con el vértice $s$ y agregando un vértice a este árbol en cada iteración.  
+
+Es goloso porque en cada iteración agrega el vértice más cercano a $s$ de entre todos los que todavía no fueron agregados al árbol. Es decir, en la iteración $k$ agrega al árbol de caminos mínimos el $k$-ésimo vértice más cercano a $s$.  
 
 Funciona cuando el grafo no tiene aristas negativas alcanzables desde $s$.  
 
@@ -552,9 +555,12 @@ DIJKSTRA(G, w, s)
             RELAX(u, v, w)
             if the call of RELAX decreased v.d
                 DECREASE-KEY(Q, v, v.d) # si el camino es mas corto, atualizo distancia
-```
+```  
 
-Complejidad: $O(n^2)$ o $O(m\ log\ n)$
+- En cada iteración agrega un nuevo vértice a $S$, por lo tanto termina en a lo sumo $n$ iteraciones.  
+- El costo de cada iteración es $O(n + d(j))$ u $O(log\ n + d(j)\ log\ n)$ según cómo se implemente $S$. Como $j$ recorre como mucho $V$, el costo total del algoritmo es $O(n^2)$ u $O((m + n) log\ n)$, respectivamente.  
+
+Complejidad final: $O(n^2)$ o $O(m\ log\ n)$
 
 
 ### ALgoritmo de Bellman-Ford
