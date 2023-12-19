@@ -659,7 +659,7 @@ $$
 u_f(v,w) = 
 \begin{cases} 
 u(v,w) - f(v,w) & \text{si } (v,w) \in A \\
-f(v, u) & \text{si } (w,v) \in A \\
+f(v, w) & \text{si } (w,v) \in A \\
 0 & \text{de lo contrario}
 \end{cases}
 $$  
@@ -669,7 +669,6 @@ La **red residual** $R(G,f)$ es la red inducida por las capacidades $u_f$ del gr
 Un **camino de aumento** es un camino orientado de $s$ a $t$ en $R(G,x)$.  
 
 - Teorema: Sea $f$ un flujo definido sobre una red N. Entonces $f$ es un flujo máximo $\iff$ no existe camino de aumento en $R(G, f)$.  
-
 
 - Teorema (**max flow-min cut**): Dada una red $N$, el valor del flujo máximo es igual a la capacidad del corte mínimo.
 
