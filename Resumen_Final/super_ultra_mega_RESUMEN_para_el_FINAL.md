@@ -563,7 +563,7 @@ DIJKSTRA(G, w, s)
 Complejidad final: $O(n^2)$ o $O(m\ log\ n)$
 
 
-### ALgoritmo de Bellman-Ford
+### Algoritmo de Bellman-Ford
 
 Este algoritmo resuelve, utilizando la técnica de programación dinámica, el problema de camino mínimo con único origen $s$ a múltiples destinos, con arcos de peso tanto positivo como negativo.  
 
