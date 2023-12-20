@@ -55,7 +55,7 @@ algoritmo BT(a, k)
         retornar
     sino
         para cada a' ∈ Sucesores(a, k)
-            BT(a0, k + 1)
+            BT(a', k + 1)
         fin para
     fin si
     retornar
