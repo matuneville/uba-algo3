@@ -1,6 +1,6 @@
 # Algoritmos y Estructuras de Datos III
 
-Repo con contenido resuelto de AyED3.  
+2023 - 2° cuatrimestre. Repo con contenido de la cursada de AyED3.  
 
 ## Práctica
 
